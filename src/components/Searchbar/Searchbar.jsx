@@ -11,13 +11,18 @@ export const Searchbar = ({ onSearch, addImages, searchValue, spinnerStarts, spi
             initialValues={initialValues}
             onSubmit={async (values, actions) => {
                 try {
-                    if (values.searchbar !== '' && values.searchbar !== searchValue) {
+                    if (values.searchbar !== '') {
                         spinnerStarts()
-                        const arrayOfImages = await fetchData(values.searchbar)
                         onSearch(values.searchbar)
-                        addImages( arrayOfImages, searchValue)
+                        const arrayOfImages = await fetchData(values.searchbar)
+
+                        
+                        addImages(arrayOfImages, searchValue)
+                        
                         actions.resetForm()
                         spinnerFinishes()
+                    }
+                    else {
                     }
                 }
                 catch (error) {
